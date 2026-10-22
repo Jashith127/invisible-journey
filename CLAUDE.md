@@ -12,6 +12,9 @@ Project: **The Invisible Journey**, an Android companion app that shows customer
 - `docs/04_ARCHITECTURE.md`: layers and data flow
 - `docs/05_ESP32_INTEGRATION.md`: BLE protocol (source of truth for UUIDs, packets, opcodes)
 
+## Frontend work (UI changes)
+Read `docs/08_FRONTEND_GUIDE.md` first. In short: all UI is in `ui/` (Compose + Material 3); colours, sizes and text styles are in `ui/Theme.kt` (`Palette`, `Dimens`, `Num`, `Format`), reusable widgets in `ui/components/`, routes in `AppNav()` in `MainActivity.kt`. Screens only read `ActiveJourney.state` and `JourneyStore`; never call `JourneyEngine` from UI. Use `FitText` in fixed-size tiles, keep touch targets >= `Dimens.Touch`, show `—` for missing data. A UI request that needs a new number is also a `domain/` change with a test. Verify with `gradlew assembleDebug` (and `gradlew test` if `domain/` changed); the sample journeys and the rider demo ride exercise every screen without sensors.
+
 ## Code map (`app/src/main/java/com/invisiblejourney/`)
 - `domain/`: **pure Kotlin, no Android imports.** `JourneyEngine` (all meter logic), `processor/` (distance, stops, potholes, roughness, congestion, AQI, summary), `SampleJourneys` (synthetic demo data run through the real engine), `model/`.
 - `data/`: `sensors/PhoneSensors.kt` (GPS, IMU as Flows), `remote/RemoteApis.kt` (Open-Meteo, Overpass, TomTom), `JourneyStore` (one JSON file per journey = export format).

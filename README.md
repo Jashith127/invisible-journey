@@ -22,6 +22,7 @@ Instant delivery apps (Blinkit, Zepto, Swiggy Instamart) shrink a delivery down 
 | [docs/05_ESP32_INTEGRATION.md](docs/05_ESP32_INTEGRATION.md) | How the app talks to an ESP32 wirelessly (BLE first, Wi-Fi fallback), the protocol, and the firmware skeleton |
 | [docs/06_DATA_MODEL.md](docs/06_DATA_MODEL.md) | Journey and sample entities, derived metrics, sync payloads |
 | [docs/07_ROADMAP.md](docs/07_ROADMAP.md) | Build phases, demo plan, open questions |
+| [docs/08_FRONTEND_GUIDE.md](docs/08_FRONTEND_GUIDE.md) | **Start here to change the UI**: screen map, design system, data sources, recipes, rules |
 
 ## TL;DR of the system
 
@@ -40,7 +41,7 @@ Instant delivery apps (Blinkit, Zepto, Swiggy Instamart) shrink a delivery down 
 ```
 
 - **One Android app, two modes:** *Rider mode* (records the journey) and *Customer mode* (watches it as a visualisation).
-- **Kotlin + Jetpack Compose**, MVVM, Hilt, Coroutines/Flow, Room.
+- **Kotlin + Jetpack Compose**, Material 3, Coroutines/Flow. Hand-written DI (no Hilt); journeys are stored as JSON files (no Room).
 - **ESP32 is optional and pluggable.** The app treats it as one more "sensor source" behind an interface, so the hardware's job can be decided later.
 
 ## Status
@@ -66,6 +67,10 @@ python tools/pothole_lab.py analyse
 ```
 
 `analyse` prints which marked potholes the detector caught or missed, its false alarms, and a threshold sweep, and writes SVG charts of every clip to `research_data/<id>/charts/`.
+
+## Changing the UI (with or without Claude Code)
+
+Clone the repo, open it in Android Studio (or run `claude` in the folder). `CLAUDE.md` is read automatically and points to [docs/08_FRONTEND_GUIDE.md](docs/08_FRONTEND_GUIDE.md), which explains where each screen lives, the colour/size system, and where the data comes from. Every screen can be worked on with the built-in sample journeys and the rider demo ride, with no sensors needed.
 
 ## How to run (free)
 
